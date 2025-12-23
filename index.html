@@ -339,18 +339,24 @@
         .heart {
             position: absolute;
             font-size: 40px;
-            animation: floatUp 3s ease-in forwards;
-            opacity: 0;
+            bottom: -50px;
+            animation: floatUp 4s ease-out forwards;
+            opacity: 1;
         }
         
         @keyframes floatUp {
             0% {
+                bottom: -50px;
                 opacity: 1;
-                transform: translateY(0) rotate(0deg);
+                transform: translateX(0) rotate(0deg);
+            }
+            50% {
+                opacity: 1;
             }
             100% {
+                bottom: 110vh;
                 opacity: 0;
-                transform: translateY(-800px) rotate(360deg);
+                transform: translateX(var(--drift)) rotate(360deg);
             }
         }
         
@@ -693,8 +699,7 @@
             messageDiv.style.border = '3px solid var(--gold)';
             messageDiv.innerHTML = `
                 <p style="font-weight: 600; font-size: 20px; margin-bottom: 10px;">🎯 Ottima mossa!</p>
-                <p>Questo cappotto si trasforma magicamente in un budget per puntare a quel "pezzo grosso" che desideravi.</p>
-                <p style="font-weight: 600; margin-top: 10px;">Domani lo rendiamo insieme!</p>
+                <p>Questo cappotto si trasforma magicamente in un budget per Zaraaaa.</p>
             `;
         }
         
@@ -808,11 +813,18 @@
                 const heart = document.createElement('div');
                 heart.className = 'heart';
                 heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
-                heart.style.left = Math.random() * 100 + '%';
-                heart.style.animationDelay = '0s';
+                
+                // Posizione orizzontale casuale
+                const leftPos = Math.random() * 100;
+                heart.style.left = leftPos + '%';
+                
+                // Deriva casuale per movimento laterale
+                const drift = (Math.random() - 0.5) * 100;
+                heart.style.setProperty('--drift', drift + 'px');
+                
                 container.appendChild(heart);
                 
-                setTimeout(() => heart.remove(), 3000);
+                setTimeout(() => heart.remove(), 4000);
             }, i * 100);
         }
     }
