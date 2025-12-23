@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎄 Regalo di Natale per Chiara</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;600&display=swap');
+        
+        :root {
+            --primary: #c0392b;
+            --secondary: #2c3e50;
+            --bg: #fdfaf6;
+            --gold: #d4af37;
+            --green: #27ae60;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background-attachment: fixed;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .snow {
+            position: fixed;
+            top: -10px;
+            background: white;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            opacity: 0.8;
+            pointer-events: none;
+            animation: fall linear infinite;
+        }
+        
+        @keyframes fall {
+            to {
+                transform: translateY(100vh);
+                opacity: 0;
+            }
+        }
+        
+        .container {
+            background: white;
+            width: 100%;
+            max-width: 600px;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .progress-bar {
+            height: 8px;
+            background: #f0f0f0;
+            margin-bottom: 30px;
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .progress {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--gold));
+            width: 0%;
+            transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .progress::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent);
+            animation: shimmer 2s infinite;
+        }
+        
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        
+        .step {
+            display: none;
+            animation: fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .step.active {
+            display: block;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        h1 {
+            font-family: 'Playfair Display', serif;
+            color: var(--primary);
+            font-size: 32px;
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: 700;
+        }
+        
+        p, li {
+            font-size: 18px;
+            line-height: 1.7;
+            color: var(--secondary);
+            margin-bottom: 15px;
+        }
+        
+        .indizi {
+            background: linear-gradient(135deg, #fff5f5 0%, #ffe5e5 100%);
+            border-left: 4px solid var(--primary);
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 8px;
+        }
+        
+        .indizio {
+            padding: 15px;
+            margin: 10px 0;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            font-size: 16px;
+            font-weight: 500;
+            color: var(--secondary);
+        }
+        
+        .btn {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary), #e74c3c);
+            color: white;
+            padding: 15px 35px;
+            margin: 10px 5px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-size: 16px;
+            box-shadow: 0 4px 15px rgba(192, 57, 43, 0.3);
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(192, 57, 43, 0.4);
+        }
+        
+        .btn:active {
+            transform: translateY(-1px);
+        }
+        
+        .btn-outline {
+            background: white;
+            border: 3px solid var(--primary);
+            color: var(--primary);
+            box-shadow: 0 4px 15px rgba(192, 57, 43, 0.2);
+        }
+        
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .btn-center {
+            display: block;
+            margin: 20px auto;
+            text-align: center;
+        }
+        
+        .bonus-box {
+            background: linear-gradient(135deg, #fff9e6 0%, #ffe9b3 100%);
+            border: 2px dashed var(--gold);
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 12px;
+            text-align: center;
+        }
+        
+        .bonus-box strong {
+            color: var(--gold);
+            font-size: 20px;
+        }
+        
+        .specchio-box {
+            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+            border: 3px solid var(--green);
+            padding: 25px;
+            margin: 25px 0;
+            border-radius: 12px;
+            position: relative;
+        }
+        
+        .choice-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin: 30px 0;
+        }
+        
+        .choice-btn {
+            width: 100%;
+            padding: 20px;
+            font-size: 18px;
+            text-align: left;
+        }
+        
+        .choice-btn::before {
+            content: "→ ";
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        
+        .contratto {
+            background: #f9f9f9;
+            border: 3px solid var(--secondary);
+            padding: 25px;
+            margin: 20px 0;
+            border-radius: 10px;
+            text-align: left;
+            font-size: 15px;
+            line-height: 1.6;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        
+        .contratto h2 {
+            text-align: center;
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-size: 20px;
+        }
+        
+        .contratto h3 {
+            color: var(--secondary);
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+        
+        .contratto p {
+            font-size: 15px;
+            margin-bottom: 12px;
+        }
+        
+        .checkbox-option {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            margin: 10px 0;
+            background: white;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .checkbox-option:hover {
+            border-color: var(--primary);
+            transform: translateX(5px);
+        }
+        
+        .checkbox-option.selected {
+            border-color: var(--primary);
+            background: #fff5f5;
+        }
+        
+        .checkbox-option input[type="checkbox"] {
+            width: 24px;
+            height: 24px;
+            margin-right: 15px;
+            cursor: pointer;
+        }
+        
+        input[type="text"] {
+            width: 100%;
+            padding: 15px;
+            margin-top: 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 18px;
+            text-align: center;
+            font-family: 'Playfair Display', serif;
+            transition: border-color 0.3s;
+        }
+        
+        input[type="text"]:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+        
+        .firma-box {
+            background: #f0f0f0;
+            border: 2px dashed var(--secondary);
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 8px;
+            text-align: center;
+            font-style: italic;
+            color: #666;
+        }
+        
+        .hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9999;
+        }
+        
+        .heart {
+            position: absolute;
+            font-size: 40px;
+            animation: floatUp 3s ease-in forwards;
+            opacity: 0;
+        }
+        
+        @keyframes floatUp {
+            0% {
+                opacity: 1;
+                transform: translateY(0) rotate(0deg);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-800px) rotate(360deg);
+            }
+        }
+        
+        .final-message {
+            text-align: center;
+            padding: 40px 20px;
+        }
+        
+        .final-message h1 {
+            font-size: 48px;
+            margin-bottom: 30px;
+        }
+        
+        .final-message p {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        
+        .timer-message {
+            background: #e8f5e9;
+            border: 2px solid var(--green);
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 600;
+            display: none;
+        }
+        
+        @media (max-width: 600px) {
+            .container {
+                padding: 25px;
+            }
+            
+            h1 {
+                font-size: 26px;
+            }
+            
+            p, li {
+                font-size: 16px;
+            }
+            
+            .btn {
+                padding: 12px 25px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="progress-bar">
+        <div id="progress" class="progress"></div>
+    </div>
+
+    <!-- STEP 1: Il Depistaggio -->
+    <div id="step1" class="step active">
+        <h1>🎄 Il tuo Regalo di Natale</h1>
+        <p style="font-size: 20px; text-align: center; margin-bottom: 25px;">
+            <strong>Ciao Chiara! Il tuo Regalo di Natale è qui. Ma prima di toccarlo, io e Paolodobbiamo capire se sei pronta.</strong>
+        </p>
+        
+        <div class="indizi">
+            <p style="font-weight: 600; color: var(--primary); margin-bottom: 15px;">
+                🔍 Indovinello in 3 indizi:
+            </p>
+            <div class="indizio">
+                <strong>Indizio 1:</strong> È una cosa che desideravi. Non è un profumo.
+            </div>
+            <div class="indizio">
+                <strong>Indizio 2:</strong> Ti aiuterà a stare al caldo. Ma non ti ripara dalla neve di San Marino.
+            </div>
+            <div class="indizio">
+                <strong>Indizio 3:</strong> È lungo. Ma non è ..... ops.
+            </div>
+        </div>
+        
+        <button class="btn btn-center" onclick="nextStep(2, 20)">
+            Ok, ho capito (forse)... fammi vedere!
+        </button>
+    </div>
+
+    <!-- STEP 2: L'Avvicinamento -->
+    <div id="step2" class="step">
+        <h1>📦 Il Pacco Misterioso</h1>
+        <p style="font-size: 20px; font-weight: 600; text-align: center;">
+            Bene, vai davanti al pacco. Toccalo. Senti com'è leggero? Cos'è?
+        </p>
+        
+        <div class="bonus-box">
+            <p style="margin: 0;">
+                <strong>🎁 Indizio Bonus:</strong>
+            </p>
+            <p style="font-size: 18px; margin-top: 10px;">
+                Ti do un aiuto: inizia con la <strong style="font-size: 24px; color: var(--primary);">Z</strong>.
+            </p>
+            <p style="font-size: 16px; font-style: italic; color: #666;">
+                Potrebbe essere uno zaino. Mmmmmm
+            </p>
+        </div>
+        
+        <button class="btn btn-center" onclick="nextStep(3, 40)" style="font-size: 20px; padding: 18px 40px;">
+            🎉 APRI IL REGALO ORA!
+        </button>
+    </div>
+
+    <!-- STEP 3: La Prova -->
+    <div id="step3" class="step">
+        <h1>✨ Sorpresa!</h1>
+        <p style="font-size: 22px; text-align: center; font-weight: 600; color: var(--primary); margin-bottom: 25px;">
+            È il cappotto di Zara. Quello che guardavi con dubbio... ma per Paolo ti stava troppo bene per lasciarlo lì.
+        </p>
+        
+        <div class="specchio-box">
+            <p style="font-size: 19px; font-weight: 600; color: var(--green); margin-bottom: 15px;">
+                🪞 MOMENTO SPECCHIO - Istruzioni:
+            </p>
+            <p style="font-size: 17px; margin-bottom: 10px;">
+                <strong>1.</strong> Metti in pausa l'app (lasciala aperta)
+            </p>
+            <p style="font-size: 17px; margin-bottom: 10px;">
+                <strong>2.</strong> Indossa il cappotto
+            </p>
+            <p style="font-size: 17px; margin-bottom: 10px;">
+                <strong>3.</strong> Vai davanti allo specchio
+            </p>
+            <p style="font-size: 17px;">
+                <strong>4.</strong> Fai una bella giravolta
+            </p>
+        </div>
+        
+        <div class="timer-message" id="timerMessage">
+            ⏰ Passati 30 secondi... l'hai provato? 😊
+        </div>
+        
+        <p style="text-align: center; font-size: 18px; font-style: italic; color: #666; margin: 20px 0;">
+            Prenditi il tuo tempo, non c'è fretta...
+        </p>
+        
+        <button class="btn btn-center" onclick="showReinforcement()">
+            Ho fatto la giravolta, continua!
+        </button>
+        
+        <div id="reinforcement" style="display: none; margin-top: 25px;">
+            <div style="background: linear-gradient(135deg, #fff5f5 0%, #ffebee 100%); border: 3px solid var(--primary); padding: 25px; border-radius: 12px; text-align: center;">
+                <p style="font-size: 20px; font-weight: 600; color: var(--primary); margin-bottom: 15px;">
+                    💖
+                </p>
+                <p style="font-size: 18px;">
+                    Visto? Te l'avevo detto. Sei <strong>oggettivamente bellissima</strong>.
+                </p>
+                <p style="font-size: 18px;">
+                    Non accettiamo critiche dal tuo specchio oggi. 👑
+                </p>
+            </div>
+            <button class="btn btn-center" onclick="nextStep(4, 60)" style="margin-top: 20px;">
+                Ok, mi sono vista. E adesso?
+            </button>
+        </div>
+    </div>
+
+    <!-- STEP 4: Il Bivio Strategico -->
+    <div id="step4" class="step">
+        <h1>⚖️ La Grande Scelta</h1>
+        <p style="font-size: 20px; text-align: center; margin-bottom: 25px;">
+            Adesso arriva la parte seria. Sappiamo che avevi in mente un'altra cosa e che i saldi sono vicini.
+        </p>
+        <p style="font-size: 19px; text-align: center; margin-bottom: 30px;">
+            Non voglio che tu sia indecisa, vogliamo che tu sia <strong style="color: var(--primary);">felice</strong>.
+        </p>
+        <p style="font-size: 18px; text-align: center; font-weight: 600; color: var(--secondary); margin-bottom: 30px;">
+            Scegli il destino di questo cappotto:
+        </p>
+        
+        <div class="choice-container">
+            <button class="btn choice-btn" onclick="makeChoice('keep')" style="background: linear-gradient(135deg, var(--green), #27ae60);">
+                💚 LO TENGO!
+            </button>
+            
+            <button class="btn choice-btn btn-outline" onclick="makeChoice('saldi')">
+                🎯 ANDIAMO A FARE SHOPPING!
+            </button>
+        </div>
+        
+        <div id="choiceMessage" style="display: none; margin-top: 25px; padding: 20px; border-radius: 10px; text-align: center; font-size: 18px;"></div>
+    </div>
+
+    <!-- STEP 5: Il Contratto Finale -->
+    <div id="step5" class="step">
+        <h1>📜 Contratto Ufficiale</h1>
+        
+        <div class="contratto">
+            <h2>📜 CONTRATTO DI NATALE: PROTOCOLLO "CAPPOTTO CHIARA" 2025</h2>
+            
+            <h3>TRA I SOTTOSCRITTI:</h3>
+            <p><strong>Il Fidanzato</strong> ("Il Promotore del Calore"): Colui che ha deciso di ignorare l'indecisione altrui per regalare un sorriso.</p>
+            <p><strong>Chiara</strong> ("La Regina dello Stile"): Colei ci pensa troppo, ma alla fine è sempre la più bella della stanza.</p>
+            
+            <h3>ARTICOLO 1: RICONOSCIMENTO DELLA REALTÀ</h3>
+            <p>La Sottoscritta Chiara riconosce solennemente che, una volta indossato il cappotto di Zara davanti allo specchio, l'effetto "WOW" è stato superiore al 99%. La Sottoscritta accetta inoltre il fatto che il Fidanzato avesse ragione: le sta divinamente.</p>
+            
+            <h3>ARTICOLO 2: CLAUSOLA DI LIBERTÀ STRATEGICA</h3>
+            <p>Il Promotore del Calore garantisce a Chiara il <strong>Diritto di Recesso Totale e Felice</strong>.</p>
+            <p>Se il desiderio di un "Cappotto Importante" è ancora vivo, la Sottoscritta ha il potere di trasformare questo pacco in un <strong>Credito Shopping</strong>.</p>
+            <p>Nessun senso di colpa è permesso: il regalo non è l'oggetto, ma la tua felicità (e stare al caldo).</p>
+            
+            <h3>ARTICOLO 3: SUPPORTO LOGISTICO E MORALE</h3>
+            <p>In caso di attivazione dell'Opzione "Shopping", il Fidanzato si impegna a:</p>
+            <ul style="margin-left: 20px;">
+                <li>Accompagnare Chiara per i negozi senza guardare l'orologio.</li>
+                <li>Portare le borse con dignità e fierezza.</li>
+                <li>Fornire consulenza estetica onesta (ma sempre a favore di Chiara).</li>
+                <li>Pagare la sosta aperitivo/caffè/ciambella di Starbucks e Caramel Macchiato necessaria per ricaricare le batterie durante lo shopping.</li>
+            </ul>
+            
+            <h3>ARTICOLO 4: DICHIARAZIONE DI BELLEZZA</h3>
+            <p>Indipendentemente dalla scelta finale, Chiara dichiara sotto la propria responsabilità di essere consapevole di essere bellissima anche con un sacco di patate, ma che con un bel cappotto è praticamente illegale.</p>
+            
+            <h3>ARTICOLO 5: FIRMA E VALIDITÀ</h3>
+            <p>Il presente contratto entra in vigore immediatamente dopo la firma. La validità è estesa a tutto il periodo dei saldi 2026 e oltre.</p>
+        </div>
+        
+        <p style="font-weight: 600; font-size: 18px; text-align: center; margin: 25px 0 20px 0; color: var(--primary);">
+            SCEGLI LA TUA OPZIONE:
+        </p>
+        
+        <div class="checkbox-option" id="optionA" onclick="selectOption('A')">
+            <input type="checkbox" id="checkA">
+            <label style="cursor: pointer; font-size: 16px;">
+                <strong>OPZIONE A:</strong> "Lo tengo, mi piace troppo, andiamo a cena così lo inauguro!"
+            </label>
+        </div>
+        
+        <div class="checkbox-option" id="optionB" onclick="selectOption('B')">
+            <input type="checkbox" id="checkB">
+            <label style="cursor: pointer; font-size: 16px;">
+                <strong>OPZIONE B:</strong> "Strategia Shopping attivata! Puntiamo al pezzo grosso."
+            </label>
+        </div>
+        
+        <div style="margin-top: 30px;">
+            <p style="font-weight: 600; margin-bottom: 10px;">Firma della Regina:</p>
+            <input type="text" id="signature" placeholder="Scrivi il tuo nome qui...">
+            
+            <div class="firma-box">
+                <p>Firma del Fidanzato: <strong>Paolo ❤️</strong></p>
+            </div>
+        </div>
+        
+        <button class="btn btn-center" onclick="finishContract()" style="margin-top: 20px; font-size: 18px;">
+            ✍️ FIRMA E ACCETTA
+        </button>
+    </div>
+
+    <!-- STEP FINALE -->
+    <div id="stepFinal" class="step">
+        <div class="final-message">
+            <h1>🎄</h1>
+            <div id="finalMessageContent"></div>
+            <p style="font-size: 32px; font-weight: 700; color: var(--primary); margin-top: 30px;">
+                BUON NATALE AMORE MIO!
+            </p>
+            <p style="font-size: 20px; margin-top: 20px;">
+                ❤️ Ti amo ❤️
+            </p>
+        </div>
+    </div>
+</div>
+
+<div id="heartsContainer" class="hearts"></div>
+
+<script>
+    let selectedOption = null;
+    let choiceType = null;
+    
+    // Inizializza l'app
+    window.onload = function() {
+        createSnow();
+    };
+    
+    // Crea effetto neve
+    function createSnow() {
+        for (let i = 0; i < 30; i++) {
+            setTimeout(() => {
+                const snow = document.createElement('div');
+                snow.className = 'snow';
+                snow.style.left = Math.random() * 100 + '%';
+                snow.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                snow.style.animationDelay = Math.random() * 5 + 's';
+                document.body.appendChild(snow);
+                
+                setTimeout(() => snow.remove(), 8000);
+            }, i * 200);
+        }
+        
+        // Ricrea neve continuamente
+        setTimeout(createSnow, 6000);
+    }
+    
+    // Passa allo step successivo
+    function nextStep(stepNum, progress) {
+        document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+        
+        const stepId = stepNum === 'final' ? 'stepFinal' : 'step' + stepNum;
+        document.getElementById(stepId).classList.add('active');
+        document.getElementById('progress').style.width = progress + '%';
+        
+        // Scroll in alto
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        
+        // Timer per step 3
+        if (stepNum === 3) {
+            setTimeout(() => {
+                document.getElementById('timerMessage').style.display = 'block';
+            }, 30000);
+        }
+    }
+    
+    // Mostra messaggio di rinforzo nello step 3
+    function showReinforcement() {
+        document.getElementById('reinforcement').style.display = 'block';
+        window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+    }
+    
+    // Gestisce la scelta nello step 4
+    function makeChoice(type) {
+        choiceType = type;
+        const messageDiv = document.getElementById('choiceMessage');
+        
+        if (type === 'keep') {
+            messageDiv.style.background = 'linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%)';
+            messageDiv.style.border = '3px solid var(--green)';
+            messageDiv.innerHTML = `
+                <p style="font-weight: 600; font-size: 20px; margin-bottom: 10px;">💚 Scelta eccellente!</p>
+                <p>Stasera usciamo a cena e lo inauguriamo subito.</p>
+            `;
+        } else {
+            messageDiv.style.background = 'linear-gradient(135deg, #fff9e6 0%, #ffe9b3 100%)';
+            messageDiv.style.border = '3px solid var(--gold)';
+            messageDiv.innerHTML = `
+                <p style="font-weight: 600; font-size: 20px; margin-bottom: 10px;">🎯 Ottima mossa!</p>
+                <p>Questo cappotto si trasforma magicamente in un budget per puntare a quel "pezzo grosso" che desideravi.</p>
+                <p style="font-weight: 600; margin-top: 10px;">Domani lo rendiamo insieme!</p>
+            `;
+        }
+        
+        messageDiv.style.display = 'block';
+        
+        setTimeout(() => {
+            nextStep(5, 80);
+        }, 3000);
+    }
+    
+    // Seleziona opzione nel contratto
+    function selectOption(option) {
+        const checkA = document.getElementById('checkA');
+        const checkB = document.getElementById('checkB');
+        const optionA = document.getElementById('optionA');
+        const optionB = document.getElementById('optionB');
+        
+        if (option === 'A') {
+            checkA.checked = true;
+            checkB.checked = false;
+            optionA.classList.add('selected');
+            optionB.classList.remove('selected');
+            selectedOption = 'A';
+        } else {
+            checkB.checked = true;
+            checkA.checked = false;
+            optionB.classList.add('selected');
+            optionA.classList.remove('selected');
+            selectedOption = 'B';
+        }
+    }
+    
+    // Completa il contratto
+    function finishContract() {
+        const signature = document.getElementById('signature').value.trim();
+        
+        if (!signature || signature.length < 2) {
+            alert('❤️ Per favore, firma con il tuo nome, sfaticatina!');
+            return;
+        }
+        
+        if (!selectedOption) {
+            alert('❤️ Seleziona un\'opzione prima di firmare, indecisina!');
+            return;
+        }
+        
+        // Crea cuori che volano
+        createHearts();
+        
+        // Prepara messaggio finale
+        const finalContent = document.getElementById('finalMessageContent');
+        
+        if (selectedOption === 'A') {
+            finalContent.innerHTML = `
+                <h2 style="font-size: 36px; color: var(--green); margin-bottom: 20px;">
+                    💚 Contratto Firmato! 💚
+                </h2>
+                <p style="font-size: 22px; margin-bottom: 15px;">
+                    Hai scelto di <strong>TENERE IL CAPPOTTO</strong>!
+                </p>
+                <p style="font-size: 20px;">
+                    Sapevo che ti sarebbe stato benissimo. 👑
+                </p>
+                <p style="font-size: 20px; margin-top: 20px;">
+                    Stasera lo inauguriamo con una bella cena insieme!
+                </p>
+            `;
+        } else {
+            // Scarica lo scontrino PDF
+            downloadReceipt();
+            
+            finalContent.innerHTML = `
+                <h2 style="font-size: 36px; color: var(--gold); margin-bottom: 20px;">
+                    🎯 Contratto Firmato! 🎯
+                </h2>
+                <p style="font-size: 22px; margin-bottom: 15px;">
+                    Hai attivato la <strong>STRATEGIA SHOPPING</strong>!
+                </p>
+                <p style="font-size: 20px;">
+                    📄 Lo scontrino è stato scaricato automaticamente!
+                </p>
+                <p style="font-size: 20px; margin-top: 20px;">
+                    Sarò il tuo compagno di shopping ufficiale! 💪
+                </p>
+            `;
+        }
+        
+        // Vai allo step finale
+        setTimeout(() => {
+            nextStep('final', 100);
+        }, 500);
+    }
+    
+    // Scarica lo scontrino PDF
+    function downloadReceipt() {
+        const link = document.createElement('a');
+        link.href = '1765995218823-eTicket-54505330782.pdf';
+        link.download = 'Scontrino_Zara_Chiara.pdf';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    }
+    
+    // Crea cuori che volano
+    function createHearts() {
+        const container = document.getElementById('heartsContainer');
+        const hearts = ['❤️', '💖', '💝', '💗', '💓', '💕'];
+        
+        for (let i = 0; i < 30; i++) {
+            setTimeout(() => {
+                const heart = document.createElement('div');
+                heart.className = 'heart';
+                heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.animationDelay = '0s';
+                container.appendChild(heart);
+                
+                setTimeout(() => heart.remove(), 3000);
+            }, i * 100);
+        }
+    }
+</script>
+
+</body>
+</html>
